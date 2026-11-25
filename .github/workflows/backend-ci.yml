@@ -74,6 +74,6 @@ jobs:
           username: anhvty
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Push backend image
+      - name: Push backend image #push lên docker hub 
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: docker push "$IMAGE:$GITHUB_SHA"
