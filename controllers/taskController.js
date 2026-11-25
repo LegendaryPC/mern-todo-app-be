@@ -25,8 +25,7 @@ const sendMail = (email, subject, title, description) => {
             console.log("Email not sent");
         } else {
             console.log('Email sent: ' + info.response);
-            console.log("Email sent successfully");
-            console.log("Email sent successfully to: ", email);
+            console.log("Test jenkin chỉ buid được vs nhánh main");
         }
     });
 }
