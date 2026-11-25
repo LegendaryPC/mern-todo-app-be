@@ -25,6 +25,7 @@ const sendMail = (email, subject, title, description) => {
             console.log("Email not sent");
         } else {
             console.log('Email sent: ' + info.response);
+            console.log("Email sent successfully");
         }
     });
 }
