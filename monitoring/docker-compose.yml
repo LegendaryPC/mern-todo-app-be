@@ -1,0 +1,28 @@
+services:
+  prometheus:
+    image: prom/prometheus:v3.14.0
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - ./backend/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+
+  grafana:
+    image: grafana/grafana:13.2.1
+    ports:
+      - "127.0.0.1:3001:3000"
+    volumes:
+      - ./backend/monitoring/grafana-datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml:ro
+      - grafana-data:/var/lib/grafana
+
+  mongodb_exporter:
+    image: percona/mongodb_exporter:0.53.0
+    environment:
+      MONGODB_URI: "${MONITORING_MONGODB_URI:-mongodb://mongo_db:27017/admin}"
+    depends_on:
+      mongo_db:
+        condition: service_healthy
+
+volumes:
+  prometheus-data:
+  grafana-data:
